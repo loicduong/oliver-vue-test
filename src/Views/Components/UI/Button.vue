@@ -2,7 +2,7 @@
   <button
     :type="type"
     :disabled="disabled"
-    @click="$emit('click', $event)"
+    @click="handleClick"
     class="inline-flex items-center justify-center px-4 py-2 border text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
     :class="buttonClasses"
   >
@@ -10,36 +10,27 @@
   </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
+import type { UIButtonProps, UIButtonEmits, ButtonVariant, ButtonSize } from '@/types'
 
-const props = defineProps({
-  variant: {
-    type: String,
-    default: 'primary',
-    validator: (value) => ['primary', 'secondary', 'success', 'danger', 'warning', 'outline'].includes(value)
-  },
-  size: {
-    type: String,
-    default: 'md',
-    validator: (value) => ['sm', 'md', 'lg'].includes(value)
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  type: {
-    type: String,
-    default: 'button'
-  }
+const props = withDefaults(defineProps<UIButtonProps>(), {
+  variant: 'primary',
+  size: 'md',
+  disabled: false,
+  type: 'button'
 })
 
-defineEmits(['click'])
+const emit = defineEmits<UIButtonEmits>()
 
-const buttonClasses = computed(() => {
+const handleClick = (event: MouseEvent): void => {
+  emit('click', event)
+}
+
+const buttonClasses = computed((): string => {
   const baseClasses = 'inline-flex items-center justify-center px-4 py-2 border text-sm font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200'
 
-  const variantClasses = {
+  const variantClasses: Record<ButtonVariant, string> = {
     primary: 'border-transparent text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-500',
     secondary: 'border-transparent text-white bg-gray-600 hover:bg-gray-700 focus:ring-gray-500',
     success: 'border-transparent text-white bg-green-600 hover:bg-green-700 focus:ring-green-500',
@@ -48,7 +39,7 @@ const buttonClasses = computed(() => {
     outline: 'border-gray-300 text-gray-700 bg-white hover:bg-gray-50 focus:ring-blue-500'
   }
 
-  const sizeClasses = {
+  const sizeClasses: Record<ButtonSize, string> = {
     sm: 'px-3 py-1.5 text-xs',
     md: 'px-4 py-2 text-sm',
     lg: 'px-6 py-3 text-base'

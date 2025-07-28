@@ -1,9 +1,9 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="flex-1 overflow-auto">
     <slot />
   </div>
 </template>
 
-<script setup>
-// Main desktop wrapper component
+<script setup lang="ts">
+// Main wrapper for desktop layout
 </script>

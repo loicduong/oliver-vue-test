@@ -6,7 +6,7 @@
     <select
       :id="id"
       :value="modelValue"
-      @change="$emit('update:modelValue', $event.target.value)"
+      @change="handleChange"
       :disabled="disabled"
       class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed appearance-none bg-white"
       :class="{ 'border-red-500': error }"
@@ -24,37 +24,23 @@
   </div>
 </template>
 
-<script setup>
-defineProps({
-  modelValue: {
-    type: [String, Number],
-    default: ''
-  },
-  label: {
-    type: String,
-    default: ''
-  },
-  placeholder: {
-    type: String,
-    default: 'Select an option'
-  },
-  options: {
-    type: Array,
-    default: () => []
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  error: {
-    type: String,
-    default: ''
-  },
-  id: {
-    type: String,
-    default: ''
-  }
+<script setup lang="ts">
+import type { FormSelectProps, FormSelectEmits } from '@/types'
+
+withDefaults(defineProps<FormSelectProps>(), {
+  modelValue: '',
+  label: '',
+  placeholder: 'Select an option',
+  options: () => [],
+  disabled: false,
+  error: '',
+  id: ''
 })
 
-defineEmits(['update:modelValue'])
+const emit = defineEmits<FormSelectEmits>()
+
+const handleChange = (event: Event): void => {
+  const target = event.target as HTMLSelectElement
+  emit('update:modelValue', target.value)
+}
 </script>

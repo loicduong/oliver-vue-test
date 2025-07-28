@@ -28,24 +28,24 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
+import type { TableConfig } from '@/types'
 
-const props = defineProps({
-  config: {
-    type: Object,
-    required: true,
-  }
-})
+interface Props {
+  config: TableConfig
+}
+
+const props = defineProps<Props>()
 
 // Computed style for headers and rows
-const headerGridStyle = computed(() => ({
+const headerGridStyle = computed((): Record<string, string> => ({
   display: 'grid',
   gridTemplateColumns: props.config.columns.map(col => col.width).join(' '),
   columnGap: props.config.colGap || '1rem',
 }))
 
-const rowGridStyle = computed(() => ({
+const rowGridStyle = computed((): Record<string, string> => ({
   display: 'grid',
   rowGap: props.config.rowGap || '1rem',
 }))

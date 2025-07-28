@@ -1,18 +1,20 @@
-<script setup>
+<script setup lang="ts">
 // Import template
-import DashboardOrdersMainTemplate from '@/views/Dashboard/Parts/Orders/DashboardOrdersMainTemplate.vue'
+import DashboardOrdersMainTemplate from '@/Views/Dashboard/Parts/Orders/DashboardOrdersMainTemplate.vue'
 
 // Import table wrapper
-import DashboardTableWrapper from '@/views/Dashboard/Global/DashboardTableWrapper.vue'
+import DashboardTableWrapper from '@/Views/Dashboard/Global/DashboardTableWrapper.vue'
 
 // Import different role table items
-import CreatorTableItem from '@/views/Dashboard/Parts/Orders/Creator/DashboardTableItemPart.vue'
-import FanTableItem from '@/views/Dashboard/Parts/Orders/Fan/DashboardTableItemPart.vue'
-import AgentTableItem from '@/views/Dashboard/Parts/Orders/Agent/DashboardTableItemPart.vue'
-import VendorTableItem from '@/views/Dashboard/Parts/Orders/Vendor/DashboardTableItemPart.vue'
+import CreatorTableItem from '@/Views/Dashboard/Parts/Orders/Creator/DashboardTableItemPart.vue'
+import FanTableItem from '@/Views/Dashboard/Parts/Orders/Fan/DashboardTableItemPart.vue'
+import AgentTableItem from '@/Views/Dashboard/Parts/Orders/Agent/DashboardTableItemPart.vue'
+import VendorTableItem from '@/Views/Dashboard/Parts/Orders/Vendor/DashboardTableItemPart.vue'
+
+import type { TableConfig } from '@/types'
 
 // Example: Different table configs for different use cases
-const ordersTableConfig = {
+const ordersTableConfig: TableConfig = {
   headers: true,
   fixedHeaderWithScrollableBody: true,
   responsiveHorizontalScroll: true,
@@ -28,7 +30,7 @@ const ordersTableConfig = {
   mobileBreakPoint: '768px',
 }
 
-const productsTableConfig = {
+const productsTableConfig: TableConfig = {
   headers: true,
   fixedHeaderWithScrollableBody: false,
   responsiveHorizontalScroll: true,

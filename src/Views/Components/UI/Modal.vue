@@ -5,7 +5,7 @@
         <!-- Backdrop -->
         <div
           class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
-          @click="$emit('update:modelValue', false)"
+          @click="handleClose"
         ></div>
 
         <!-- Modal content -->
@@ -15,14 +15,14 @@
             @click.stop
           >
             <!-- Header -->
-            <div v-if="$slots.header || title" class="flex items-center justify-between p-6 border-b border-gray-200">
+            <div v-if="$slots['header'] || title" class="flex items-center justify-between p-6 border-b border-gray-200">
               <h3 v-if="title" class="text-lg font-medium text-gray-900">
                 {{ title }}
               </h3>
               <slot name="header" />
               <button
                 v-if="showCloseButton"
-                @click="$emit('update:modelValue', false)"
+                @click="handleClose"
                 class="text-gray-400 hover:text-gray-600 transition-colors"
               >
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -37,7 +37,7 @@
             </div>
 
             <!-- Footer -->
-            <div v-if="$slots.footer" class="flex items-center justify-end gap-3 p-6 border-t border-gray-200">
+            <div v-if="$slots['footer']" class="flex items-center justify-end gap-3 p-6 border-t border-gray-200">
               <slot name="footer" />
             </div>
           </div>
@@ -47,23 +47,20 @@
   </Teleport>
 </template>
 
-<script setup>
-defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false
-  },
-  title: {
-    type: String,
-    default: ''
-  },
-  showCloseButton: {
-    type: Boolean,
-    default: true
-  }
+<script setup lang="ts">
+import type { UIModalProps, UIModalEmits } from '@/types'
+
+withDefaults(defineProps<UIModalProps>(), {
+  modelValue: false,
+  title: '',
+  showCloseButton: true
 })
 
-defineEmits(['update:modelValue'])
+const emit = defineEmits<UIModalEmits>()
+
+const handleClose = (): void => {
+  emit('update:modelValue', false)
+}
 </script>
 
 <style scoped>

@@ -4,6 +4,6 @@
   </h1>
 </template>
 
-<script setup>
+<script setup lang="ts">
 // Dashboard title component
 </script>
