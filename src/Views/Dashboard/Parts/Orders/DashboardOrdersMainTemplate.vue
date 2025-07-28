@@ -1,68 +1,77 @@
 <script setup lang="ts">
-// Dashboard orders main template component
+// Global layout wrappers
+import DashboardMainWrapperDesktop from '@/Views/Dashboard/Global/DashboardMainWrapperDesktop.vue'
+import DashboardBaseContainerWrapper from '@/Views/Dashboard/Global/DashboardBaseContainerWrapper.vue'
+import DashboardTwoColContainerWrapper from '@/Views/Dashboard/Global/DashboardTwoColContainerWrapper.vue'
+import DashboardTwoColInnerContainerWrapper from '@/Views/Dashboard/Global/DashboardTwoColInnerContainerWrapper.vue'
+import DashboardDesktopHeaderContainerWrapper from '@/Views/Dashboard/Global/DashboardDesktopHeaderContainerWrapper.vue'
+
+// Header parts
+import DashboardMobileHeaderPart from '@/Views/Dashboard/Parts/Header/DashboardMobileHeaderPart.vue'
+import DashboardDesktopHeaderPart from '@/Views/Dashboard/Parts/Header/DashboardDesktopHeaderPart.vue'
+
+// Title and actions
+import DashboardTitle from '@/Views/Dashboard/Global/DashboardTitle.vue'
+import DashboardUpdateButtons from '@/Views/Dashboard/Global/DashboardUpdateButtons.vue'
+
+// Table wrapper (enabled via config)
+import DashboardTableWrapper from '@/Views/Dashboard/Global/DashboardTableWrapper.vue'
+
+// Role-specific rows (example for "Creator")
+import CreatorTableItem from '@/Views/Dashboard/Parts/Orders/Creator/DashboardTableItemPart.vue'
+import FanTableItem from '@/Views/Dashboard/Parts/Orders/Fan/DashboardTableItemPart.vue'
+import AgentTableItem from '@/Views/Dashboard/Parts/Orders/Agent/DashboardTableItemPart.vue'
+import VendorTableItem from '@/Views/Dashboard/Parts/Orders/Vendor/DashboardTableItemPart.vue'
+
+// Table config
+import type { TableConfig } from '@/types'
+
+const tableConfig: TableConfig = {
+  headers: true,
+  fixedHeaderWithScrollableBody: true,
+  responsiveHorizontalScroll: true,
+  columns: [
+    { title: 'Order ID', width: '150px' },
+    { title: 'Customer', width: '1fr' },
+    { title: 'Date', width: '120px' },
+    { title: 'Amount', width: '100px' },
+    { title: 'Status', width: '120px' },
+  ],
+  rowGap: '12px',
+  colGap: '16px',
+  mobileBreakPoint: '768px',
+}
 </script>
 
 <template>
-  <div class="p-6 bg-white rounded-lg shadow">
-    <div class="flex items-center justify-between mb-6">
-      <h2 class="text-xl font-bold text-gray-900">Orders</h2>
-      <button class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-        Add Order
-      </button>
-    </div>
+  <DashboardMainWrapperDesktop>
+    <DashboardBaseContainerWrapper>
+      <DashboardDesktopHeaderContainerWrapper>
+        <div class="block md:hidden">
+          <DashboardMobileHeaderPart />
+        </div>
+        <div class="hidden md:block">
+          <DashboardDesktopHeaderPart />
+        </div>
 
-    <div class="overflow-x-auto">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
-          <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          <tr>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#12345</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="flex items-center">
-                <div class="w-8 h-8 bg-gray-300 rounded-full mr-3"></div>
-                <div>
-                  <div class="text-sm font-medium text-gray-900">John Doe</div>
-                  <div class="text-sm text-gray-500">john.doe@email.com</div>
-                </div>
-              </div>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-01-15</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">$299.99</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                Completed
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#12346</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="flex items-center">
-                <div class="w-8 h-8 bg-gray-300 rounded-full mr-3"></div>
-                <div>
-                  <div class="text-sm font-medium text-gray-900">Jane Smith</div>
-                  <div class="text-sm text-gray-500">jane.smith@email.com</div>
-                </div>
-              </div>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-01-16</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">$199.99</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                Pending
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+        <DashboardTitle>
+          My Orders
+        </DashboardTitle>
+
+        <DashboardUpdateButtons />
+      </DashboardDesktopHeaderContainerWrapper>
+
+      <DashboardTwoColContainerWrapper>
+        <DashboardTwoColInnerContainerWrapper>
+          <DashboardTableWrapper :config="tableConfig">
+            <!-- Example table items -->
+            <CreatorTableItem />
+            <FanTableItem />
+            <AgentTableItem />
+            <VendorTableItem />
+          </DashboardTableWrapper>
+        </DashboardTwoColInnerContainerWrapper>
+      </DashboardTwoColContainerWrapper>
+    </DashboardBaseContainerWrapper>
+  </DashboardMainWrapperDesktop>
 </template>

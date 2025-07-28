@@ -5,5 +5,5 @@
 </template>
 
 <script setup lang="ts">
-// Base container wrapper component
+// No props needed for a simple layout wrapper
 </script>
