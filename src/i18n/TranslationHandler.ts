@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { i18n } from '@/i18n';
+import i18n from '@/i18n';
 import { useRoute } from 'vue-router';
 import { appRoutes } from '@/config/routes';
 import { supportedLocales, defaultLocale } from '@/config/locales';
@@ -59,7 +59,7 @@ async function loadTranslationFile(filePath, locale) {
         });
 
         loadedFilesCache.add(cacheKey);
-    } catch (err) {
+    } catch {
         console.warn(`Missing translation: ${filePath}/${locale}.json`);
         if (locale !== 'en') {
             await loadTranslationFile(filePath, 'en');
@@ -67,45 +67,44 @@ async function loadTranslationFile(filePath, locale) {
     }
 }
 
-export async function initTranslationHandler() {
-    const route = useRoute();
-    const userRole = window?.userData?.currentRole;
-    const locale = getCurrentLocale();
+export async function initTranslationHandler(to) {
+const userRole  = window?.userData?.currentRole
+  const locale    = getCurrentLocale()
+  const routePath = to.path
 
-    const matchedRoute = appRoutes.find(r => r.path === route.path);
-    if (!matchedRoute) return;
+  const matchedRoute = appRoutes.find(r => r.path === routePath)
+  if (!matchedRoute) return
 
-    const roleConfig = matchedRoute.roles?.[userRole];
-    const pageKey = matchedRoute.pageKey || roleConfig?.pageKey;
-    const translationPath = matchedRoute.translationPath;
+  const roleConfig = matchedRoute.roles?.[userRole]
+  if (!roleConfig) return
 
-    if (!translationPath) return;
+  const segments    = routePath.split('/').filter(Boolean)
+  const parentFiles = segments.map((_, i) =>
+    segments.slice(0, i + 1).join('/')
+  )
+  const roleFiles = roleConfig.translations || []
+  const allFiles  = Array.from(new Set([...parentFiles, ...roleFiles]))
 
-    const relativePath = translationPath
-        .replace('@/i18n/', '')
-        .replace(`{locale}`, locale)
-        .replace(/\.json$/, '');
-
-    await loadTranslationFile(relativePath, locale);
-
-    // Load role-based files if definedconst roleFiles = roleConfig?.translations || [];
-    for (const rolePath of roleFiles) {
-        await loadTranslationFile(rolePath, locale);
-    }
+  // Parallel load all needed JSON files
+  await Promise.all(
+    allFiles.map(fp => loadTranslationFile(fp, locale))
+  )
 }
 
 export function getText(key) {
-    const route = useRoute();
-    const userRole = window?.userData?.currentRole;
-    const matchedRoute = appRoutes.find(r => r.path === route.path);
-    const roleConfig = matchedRoute?.roles?.[userRole];
-    const pageKey = matchedRoute?.pageKey || roleConfig?.pageKey;
+  const route    = useRoute()
+  const userRole = window?.userData?.currentRole || 'guest'
 
-    if (!pageKey) return '';
+  const matchedRoute = appRoutes.find(r => r.path === route.path)
+  const roleConfig   = matchedRoute?.roles?.[userRole]
+  const pageKey      = roleConfig?.pageKey
 
-    const locale = getCurrentLocale();
-    const fullKey = `${pageKey}.${key}`;
-    const result = i18n.global.t(fullKey, locale);
+  console.log(userRole, matchedRoute, key, pageKey);
+  if (!pageKey) return ''
 
-    return result === fullKey ? '' : result;
+  const locale   = getCurrentLocale()
+  const fullKey  = `${pageKey}.${key}`
+  console.log('fullKey', fullKey)
+  const result   = i18n.global.t(fullKey, locale)
+  return result === fullKey ? '' : result
 }

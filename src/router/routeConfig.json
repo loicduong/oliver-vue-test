@@ -8,33 +8,45 @@
     "requiresAuth": false,
     "redirectIfLoggedIn": "/dashboard",
     "supportedRoles": [],
-    "componentPath": "@/Views/Auth/LogIn.vue"
+    "componentPath": "@/Views/Auth/LogIn.vue",
+    "translationPath": "@/i18n/auth/{locale}/login.json"
   },
   {
     "slug": "/sign-up",
     "requiresAuth": false,
     "redirectIfLoggedIn": "/dashboard",
     "supportedRoles": [],
-    "componentPath": "@/Views/Auth/SignUp.vue"
+    "componentPath": "@/Views/Auth/SignUp.vue",
+    "translationPath": "@/i18n/auth/{locale}/sign-up.json"
   },
   {
     "slug": "/reset-password",
     "requiresAuth": false,
     "redirectIfLoggedIn": "/dashboard",
     "supportedRoles": [],
-    "componentPath": "@/Views/Auth/ResetPassword.vue"
+    "componentPath": "@/Views/Auth/ResetPassword.vue",
+    "translationPath": "@/i18n/auth/{locale}/reset-password.json"
   },
   {
     "slug": "/dashboard",
     "requiresAuth": true,
     "supportedRoles": ["any"],
     "redirectIfNotAuth": "/log-in",
-    "componentPath": "@/Views/Dashboard/Parts/Orders/DashboardOrdersMainTemplate.vue"
+    "componentPath": "@/Views/Dashboard/Parts/Orders/DashboardOrdersMainTemplate.vue",
+    "translationPath": "@/i18n/dash/{locale}/dashboard.json"
   },
   {
     "slug": "/dashboard/order",
-    "inheritConfigFromParent": true,
-    "componentPath": "@/Views/OrdersMain.vue"
+    "redirectIfNotAuth": "/log-in",
+    "componentPath": "@/Views/OrdersMain.vue",
+    "translationPath": "@/i18n/dash/{locale}/dashboard.json",
+    "supportedRoles": ["any"]
+  },
+  {
+    "slug": "/404",
+    "requiresAuth": false,
+    "supportedRoles": [],
+    "componentPath": "@/Views/Error/NotFound.vue"
   },
   {
     "slug": "/:pathMatch(.*)*",

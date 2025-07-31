@@ -9,13 +9,13 @@
         rounded="l"
     >
       <v-card-title class="text-h5 font-weight-bold text-center">
-        {{ $t('login.loginTitle') }}
+        {{ getText('login.loginTitle') }}
       </v-card-title>
 
       <v-form @submit.prevent="login" validate-on="input" class="flex-grow-1">
         <v-text-field
             v-model="email"
-            :label="$t('login.email')"
+            :label="getText('login.email')"
             type="email"
             variant="outlined"
             :rules="[rules.required, rules.email]"
@@ -25,7 +25,7 @@
         <v-text-field
             v-model="password"
             :type="showPassword ? 'text' : 'password'"
-            :label="$t('login.password')"
+            :label="getText('login.password')"
             variant="outlined"
             :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
             @click:append-inner="showPassword = !showPassword"
@@ -41,7 +41,7 @@
             size="large"
             :loading="loading"
         >
-          {{ $t('login.loginButton') }}
+          {{ getText('login.loginButton') }}
         </v-btn>
 
         <v-alert
@@ -57,26 +57,29 @@
       </v-form>
 
       <div class="text-caption text-center mt-6">
-        {{ $t('login.noAccount') }}
-        <RouterLink to="/register" class="text-primary text-decoration-underline">
-          {{ $t('login.signUp') }}
+        {{ getText('login.noAccount') }}
+        <RouterLink to="/sign-up" class="text-primary text-decoration-underline">
+          {{ getText('login.signUp') }}
         </RouterLink>
       </div>
 
       <div class="text-caption text-center mt-2">
-        {{ $t('login.forgotPassword') }}
-        <RouterLink to="/forgot-password" class="text-primary text-decoration-underline">
-          {{ $t('login.resetPassword') }}
+        {{ getText('login.forgotPassword') }}
+        <RouterLink to="/reset-password" class="text-primary text-decoration-underline">
+          {{ getText('login.resetPassword') }}
         </RouterLink>
       </div>
     </v-card>
   </v-container>
 </template>
 
-<script setup>
+<script setup lang="ts">
+// @ts-nocheck
+
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { authHandler } from '@/services/authHandler'
+import { getText } from '@/i18n/TranslationHandler'
 
 const email = ref('')
 const password = ref('')
@@ -101,6 +104,8 @@ const login = async () => {
 
     // Fetch current user attributes
     const userDetails = await authHandler.getCurrentUserAttributesMap()
+
+    console.log('userDetails', userDetails)
 
     const hasUsername = !!userDetails.username
     const hasRole = !!userDetails.role

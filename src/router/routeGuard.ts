@@ -7,9 +7,10 @@ import {
   matchRole,
   getRouteBySlug
 } from './routeUtils';
-import routeConfig from './routeConfig.json';
+import { initTranslationHandler } from '@/i18n/TranslationHandler';
 
-export default function routeGuard(to, from, next) {
+
+export default async function routeGuard(to, from, next) {
   const matchedRoute = getRouteBySlug(to.path);
   if (!matchedRoute) return next('/404');
 
@@ -58,6 +59,8 @@ export default function routeGuard(to, from, next) {
       }
     }
   }
+
+  await initTranslationHandler(to)
 
   next();
 }
