@@ -1,0 +1,27 @@
+{
+  "title": "ڈیش بورڈ",
+  "subtitle": "آپ کے ڈیش بورڈ میں خوش آمدید",
+  "navigation": {
+    "overview": "جائزہ",
+    "profile": "پروفائل",
+    "settings": "ترتیبات",
+    "logout": "لاگ آؤٹ"
+  },
+  "stats": {
+    "totalUsers": "کل صارفین",
+    "activeUsers": "فعال صارفین",
+    "revenue": "آمدنی",
+    "growth": "ترقی"
+  },
+  "actions": {
+    "editProfile": "پروفائل میں ترمیم کریں",
+    "changePassword": "پاس ورڈ تبدیل کریں",
+    "viewReports": "رپورٹس دیکھیں",
+    "exportData": "ڈیٹا برآمد کریں"
+  },
+  "messages": {
+    "welcome": "خوش آمدید!",
+    "lastLogin": "آخری لاگ ان: {date}",
+    "profileUpdated": "پروفائل کامیابی سے اپ ڈیٹ ہو گئی"
+  }
+}

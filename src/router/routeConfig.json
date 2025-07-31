@@ -1,0 +1,43 @@
+[
+  {
+    "slug": "/",
+    "redirect": "/log-in"
+  },
+  {
+    "slug": "/log-in",
+    "requiresAuth": false,
+    "redirectIfLoggedIn": "/dashboard",
+    "supportedRoles": [],
+    "componentPath": "../Views/Auth/LogIn.vue"
+  },
+  {
+    "slug": "/sign-up",
+    "requiresAuth": false,
+    "redirectIfLoggedIn": "/dashboard",
+    "supportedRoles": [],
+    "componentPath": "../Views/Auth/SignUp.vue"
+  },
+  {
+    "slug": "/reset-password",
+    "requiresAuth": false,
+    "redirectIfLoggedIn": "/dashboard",
+    "supportedRoles": [],
+    "componentPath": "../Views/Auth/ResetPassword.vue"
+  },
+  {
+    "slug": "/dashboard",
+    "requiresAuth": true,
+    "supportedRoles": ["any"],
+    "redirectIfNotAuth": "/log-in",
+    "componentPath": "../Views/Dashboard/Parts/Orders/DashboardOrdersMainTemplate.vue"
+  },
+  {
+    "slug": "/dashboard/order",
+    "inheritConfigFromParent": true,
+    "componentPath": "../Views/OrdersMain.vue"
+  },
+  {
+    "slug": "/:pathMatch(.*)*",
+    "redirect": "/404"
+  }
+]
