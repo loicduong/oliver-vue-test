@@ -8,33 +8,33 @@
     "requiresAuth": false,
     "redirectIfLoggedIn": "/dashboard",
     "supportedRoles": [],
-    "componentPath": "../Views/Auth/LogIn.vue"
+    "componentPath": "@/Views/Auth/LogIn.vue"
   },
   {
     "slug": "/sign-up",
     "requiresAuth": false,
     "redirectIfLoggedIn": "/dashboard",
     "supportedRoles": [],
-    "componentPath": "../Views/Auth/SignUp.vue"
+    "componentPath": "@/Views/Auth/SignUp.vue"
   },
   {
     "slug": "/reset-password",
     "requiresAuth": false,
     "redirectIfLoggedIn": "/dashboard",
     "supportedRoles": [],
-    "componentPath": "../Views/Auth/ResetPassword.vue"
+    "componentPath": "@/Views/Auth/ResetPassword.vue"
   },
   {
     "slug": "/dashboard",
     "requiresAuth": true,
     "supportedRoles": ["any"],
     "redirectIfNotAuth": "/log-in",
-    "componentPath": "../Views/Dashboard/Parts/Orders/DashboardOrdersMainTemplate.vue"
+    "componentPath": "@/Views/Dashboard/Parts/Orders/DashboardOrdersMainTemplate.vue"
   },
   {
     "slug": "/dashboard/order",
     "inheritConfigFromParent": true,
-    "componentPath": "../Views/OrdersMain.vue"
+    "componentPath": "@/Views/OrdersMain.vue"
   },
   {
     "slug": "/:pathMatch(.*)*",

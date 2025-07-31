@@ -4,6 +4,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import routeConfig from './routeConfig.json';
 import routeGuard from './routeGuard';
 
+const viewModules = import.meta.glob('@/Views/**/*.vue', { eager: false });
+
 const routes = routeConfig.map(route => {
   if (route.redirect) {
     return { path: route.slug, redirect: route.redirect };
@@ -22,7 +24,8 @@ const routes = routeConfig.map(route => {
       }
 
       try {
-        return await import(/* @vite-ignore */ finalPath);
+        const resolvedPath = finalPath.replace('@/', '/src/');
+        return await viewModules[resolvedPath]?.();
       } catch (err) {
         console.warn(`[ROUTER] Failed to load: ${finalPath}`, err);
         return import('@/Views/Error/NotFound.vue');
