@@ -28,6 +28,14 @@
     "translationPath": "@/i18n/auth/{locale}/login.json"
   },
   {
+    "slug": "/forgot-password",
+    "requiresAuth": false,
+    "redirectIfLoggedIn": "/dashboard",
+    "supportedRoles": [],
+    "componentPath": "@/Views/Auth/ForgotPassword.vue",
+    "translationPath": "@/i18n/auth/{locale}/login.json"
+  },
+  {
     "slug": "/dashboard",
     "requiresAuth": true,
     "supportedRoles": ["any"],

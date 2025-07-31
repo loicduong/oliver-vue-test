@@ -33,9 +33,11 @@
         <v-text-field
             v-model="newPassword"
             label="New Password"
-            type="password"
+            :type="showPassword ? 'text' : 'password'"
             variant="outlined"
             prepend-inner-icon="mdi-lock-reset"
+            :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
+            @click:append-inner="showPassword = !showPassword"
             class="mt-2"
         />
 
@@ -78,6 +80,7 @@ const message = ref('')
 const status = ref(null) // 'success' | 'error' | null
 const loading = ref(false)
 const router = useRouter()
+const showPassword = ref(false)
 
 onMounted(() => {
   const savedEmail = localStorage.getItem('resetEmail')

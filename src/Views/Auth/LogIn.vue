@@ -65,7 +65,7 @@
 
       <div class="text-caption text-center mt-2">
         {{ getText('login.forgotPassword') }}
-        <RouterLink to="/reset-password" class="text-primary text-decoration-underline">
+        <RouterLink to="/forgot-password" class="text-primary text-decoration-underline">
           {{ getText('login.resetPassword') }}
         </RouterLink>
       </div>
@@ -115,7 +115,7 @@ const login = async () => {
 
     setTimeout(() => {
       if (!hasUsername || !hasRole) {
-        router.push('/user/user-info')
+        router.push('/dashboard')
       } else {
         router.push('/dashboard')
       }
