@@ -23,6 +23,9 @@ import FanTableItem from '@/Views/Dashboard/Parts/Orders/Fan/DashboardTableItemP
 import AgentTableItem from '@/Views/Dashboard/Parts/Orders/Agent/DashboardTableItemPart.vue'
 import VendorTableItem from '@/Views/Dashboard/Parts/Orders/Vendor/DashboardTableItemPart.vue'
 
+// Translation handler
+import { getText } from '@/i18n/TranslationHandler'
+
 // Table config
 import type { TableConfig } from '@/types'
 
@@ -55,7 +58,7 @@ const tableConfig: TableConfig = {
         </div>
 
         <DashboardTitle>
-          My Orders
+          {{ getText('dashboard.title') }}
         </DashboardTitle>
 
         <DashboardUpdateButtons />

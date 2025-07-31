@@ -70,29 +70,24 @@ export const appRoutes = [
     name: 'dashboard',
     loginRequired: true,
     roles: {
-      fan: {
-        template: 'FanDashboard',
-        pageKey: 'dashboard.fan',
-        translations: [
-          'dashboard',
-          'common/fan'
-        ]
-      },
-      creator: {
-        template: 'CreatorDashboard',
-        pageKey: 'dashboard.creator',
-        translations: [
-          'dashboard',
-          'common/creator'
-        ]
-      },
-      vendor: {
-        template: 'VendorDashboard',
-        pageKey: 'dashboard.vendor',
-        translations: [
-          'dashboard',
-          'common/vendor'
-        ]
+      guest: {
+        template: 'Dashboard',
+        pageKey: 'dash',
+        translations: ['dashboard'],
+        prefetchNext: ['/dashboard']
+      }
+    }
+  },
+  {
+    path: '/dashboard/order',
+    name: 'dashboard-order',
+    loginRequired: true,
+    roles: {
+      guest: {
+        template: 'Dashboard',
+        pageKey: 'dash',
+        translations: ['dashboard'],
+        prefetchNext: ['/dashboard']
       }
     }
   },

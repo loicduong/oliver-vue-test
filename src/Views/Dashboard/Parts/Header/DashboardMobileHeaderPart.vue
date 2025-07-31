@@ -7,7 +7,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </button>
-        <h1 class="ml-4 text-lg font-semibold text-gray-900">Home</h1>
+        <h1 class="ml-4 text-lg font-semibold text-gray-900">{{ getText('dashboard.navigation.overview') }}</h1>
       </div>
       <div class="flex items-center space-x-2">
         <v-menu>
@@ -20,7 +20,7 @@
           </template>
           <v-list>
             <v-list-item @click="handleLogout">
-              <v-list-item-title>Logout</v-list-item-title>
+              <v-list-item-title>{{ getText('dashboard.navigation.logout') }}</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -32,6 +32,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { authHandler } from '@/services/authHandler'
+import { getText } from '@/i18n/TranslationHandler'
 
 const router = useRouter()
 

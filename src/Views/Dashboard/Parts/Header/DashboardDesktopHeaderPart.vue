@@ -1,13 +1,13 @@
 <template>
   <div class="flex items-center justify-between">
     <div class="flex items-center space-x-4">
-      <h1 class="text-xl font-semibold text-gray-900">Home</h1>
+      <h1 class="text-xl font-semibold text-gray-900">{{ getText('dashboard.navigation.overview') }}</h1>
     </div>
     <nav class="flex space-x-4">
-      <RouterLink to="/dashboard/order" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Orders</RouterLink>
-      <RouterLink to="/dashboard/order" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Products</RouterLink>
-      <RouterLink to="/dashboard/order" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Customers</RouterLink>
-      <RouterLink to="/dashboard/order" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Analytics</RouterLink>
+      <RouterLink to="/dashboard/order" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">{{ getText('dashboard.navigation.overview') }}</RouterLink>
+      <RouterLink to="/dashboard/order" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">{{ getText('dashboard.actions.viewReports') }}</RouterLink>
+      <RouterLink to="/dashboard/order" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">{{ getText('dashboard.navigation.profile') }}</RouterLink>
+      <RouterLink to="/dashboard/order" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">{{ getText('dashboard.stats.revenue') }}</RouterLink>
     </nav>
     <div class="flex items-center space-x-4">
       <v-menu>
@@ -20,7 +20,7 @@
         </template>
         <v-list>
           <v-list-item @click="handleLogout">
-            <v-list-item-title>Logout</v-list-item-title>
+            <v-list-item-title>{{ getText('dashboard.navigation.logout') }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -31,6 +31,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { authHandler } from '@/services/authHandler'
+import { getText } from '@/i18n/TranslationHandler'
 
 const router = useRouter()
 

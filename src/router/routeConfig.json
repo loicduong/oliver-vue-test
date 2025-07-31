@@ -17,7 +17,7 @@
     "redirectIfLoggedIn": "/dashboard",
     "supportedRoles": [],
     "componentPath": "@/Views/Auth/SignUp.vue",
-    "translationPath": "@/i18n/auth/{locale}/sign-up.json"
+    "translationPath": "@/i18n/auth/{locale}/login.json"
   },
   {
     "slug": "/reset-password",
@@ -25,7 +25,7 @@
     "redirectIfLoggedIn": "/dashboard",
     "supportedRoles": [],
     "componentPath": "@/Views/Auth/ResetPassword.vue",
-    "translationPath": "@/i18n/auth/{locale}/reset-password.json"
+    "translationPath": "@/i18n/auth/{locale}/login.json"
   },
   {
     "slug": "/dashboard",
@@ -37,6 +37,7 @@
   },
   {
     "slug": "/dashboard/order",
+    "requiresAuth": true,
     "redirectIfNotAuth": "/log-in",
     "componentPath": "@/Views/OrdersMain.vue",
     "translationPath": "@/i18n/dash/{locale}/dashboard.json",

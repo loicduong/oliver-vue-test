@@ -4,11 +4,13 @@
     <div>Agent Smith</div>
     <div>2024-01-15</div>
     <div>$1,250.00</div>
-    <div><span class="text-green-600">Completed</span></div>
+    <div><span class="text-green-600">{{ getText('dashboard.stats.growth') }}</span></div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { getText } from '@/i18n/TranslationHandler'
+
 const rowStyle = {
   display: 'grid',
   gridTemplateColumns: '150px 1fr 120px 100px 120px',

@@ -4,11 +4,13 @@
     <div>Vendor Corp</div>
     <div>2024-01-22</div>
     <div>$3,750.00</div>
-    <div><span class="text-red-600">Cancelled</span></div>
+    <div><span class="text-red-600">{{ getText('dashboard.stats.totalUsers') }}</span></div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { getText } from '@/i18n/TranslationHandler'
+
 const rowStyle = {
   display: 'grid',
   gridTemplateColumns: '150px 1fr 120px 100px 120px',

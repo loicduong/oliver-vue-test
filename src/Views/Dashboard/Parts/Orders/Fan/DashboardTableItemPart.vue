@@ -4,11 +4,13 @@
     <div>Fan Club</div>
     <div>2024-01-18</div>
     <div>$150.00</div>
-    <div><span class="text-blue-600">Processing</span></div>
+    <div><span class="text-blue-600">{{ getText('dashboard.stats.activeUsers') }}</span></div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { getText } from '@/i18n/TranslationHandler'
+
 const rowStyle = {
   display: 'grid',
   gridTemplateColumns: '150px 1fr 120px 100px 120px',
