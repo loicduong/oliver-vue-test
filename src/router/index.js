@@ -2,6 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router';
 import routeConfig from './routeConfig.json';
 import routeGuard from './routeGuard';
 
+// Use import.meta.glob to pre-load all components
+const componentModules = import.meta.glob('@/components/**/*.vue', { eager: false });
+
+// Debug: Log all available components
+console.log('[ROUTER] Available components:', Object.keys(componentModules));
+
 const routes = routeConfig.map(route => {
   if (route.redirect) {
     return { path: route.slug, redirect: route.redirect };
@@ -20,9 +26,15 @@ const routes = routeConfig.map(route => {
       }
 
       try {
-        const moduleKey = finalPath.replace('@', '/src');
-
-        return await import(/* @vite-ignore */ moduleKey);
+        // Convert the path from @/components/... to /src/components/...
+        const normalizedPath = finalPath.replace('@', '/src');
+        
+        if (componentModules[normalizedPath]) {
+          return componentModules[normalizedPath]();
+        } else {
+          console.warn(`[ROUTER] Component not found: ${finalPath}`);
+          return import('@/components/NotFound.vue');
+        }
       } catch (err) {
         console.warn(`[ROUTER] Failed to load: ${finalPath}`, err);
         return import('@/components/NotFound.vue');
