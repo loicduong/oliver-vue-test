@@ -3,10 +3,7 @@ import routeConfig from './routeConfig.json';
 import routeGuard from './routeGuard';
 
 // Use import.meta.glob to pre-load all components
-const componentModules = import.meta.glob('@/components/**/*.vue', { eager: false });
-
-// Debug: Log all available components
-console.log('[ROUTER] Available components:', Object.keys(componentModules));
+const componentModules = import.meta.glob('@/components/**/*.vue', { eager: true });
 
 const routes = routeConfig.map(route => {
   if (route.redirect) {
@@ -30,7 +27,7 @@ const routes = routeConfig.map(route => {
         const normalizedPath = finalPath.replace('@', '/src');
         
         if (componentModules[normalizedPath]) {
-          return componentModules[normalizedPath]();
+          return componentModules[normalizedPath];
         } else {
           console.warn(`[ROUTER] Component not found: ${finalPath}`);
           return import('@/components/NotFound.vue');
