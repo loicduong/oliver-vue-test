@@ -16,15 +16,32 @@
 
       <!-- Bottom -->
       <div class="d-flex flex-column align-center pb-4 mt-auto">
-        <v-btn icon color="white" @click="showUpdateProfile = true" class="mt-4">
-          <v-icon>mdi-account-edit</v-icon>
-        </v-btn>
-        <v-btn icon color="white" @click="showChangePassword = true" class="mt-4">
-          <v-icon>mdi-lock-reset</v-icon>
-        </v-btn>
-        <v-btn icon color="white" @click="handleLogout" class="mt-4">
-          <v-icon>mdi-logout</v-icon>
-        </v-btn>
+        <v-tooltip location="right">
+          <template v-slot:activator="{ props }">
+            <v-btn icon color="white" @click="showUpdateProfile = true" class="mt-4" v-bind="props">
+              <v-icon>mdi-account-edit</v-icon>
+            </v-btn>
+          </template>
+          <span>Update Profile</span>
+        </v-tooltip>
+        
+        <v-tooltip location="right">
+          <template v-slot:activator="{ props }">
+            <v-btn icon color="white" @click="showChangePassword = true" class="mt-4" v-bind="props">
+              <v-icon>mdi-lock-reset</v-icon>
+            </v-btn>
+          </template>
+          <span>Change Password</span>
+        </v-tooltip>
+        
+        <v-tooltip location="right">
+          <template v-slot:activator="{ props }">
+            <v-btn icon color="white" @click="handleLogout" class="mt-4" v-bind="props">
+              <v-icon>mdi-logout</v-icon>
+            </v-btn>
+          </template>
+          <span>Logout</span>
+        </v-tooltip>
       </div>
     </v-navigation-drawer>
 
